@@ -1,6 +1,7 @@
 #!/bin/sh -e
 
-while read file ; do
+cat 1-infected | while read line ; do
+	file=`echo $line | cut -d: -f1`
 	echo "# $file"
-	perl -p -i -n -e 's/\Q<?php $mralieaqhv\E.*?;\s+\?>//' $file
+	perl -p -i -n -e 's/\Q<?php $mralieaqhv\E.*?;\s+\?>//' "$file"
 done
