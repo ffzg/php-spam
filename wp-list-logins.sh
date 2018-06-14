@@ -9,4 +9,6 @@ fi
 
 db=`grep DB_NAME $path/wp-config.php  | cut -d, -f2 | tr -d " ');"`
 
-cat wp_wfLogins.sql | mysql $db | less -S
+echo "# DB_NAME = $db"
+
+cat wp_wfLogins.sql | mysql -t $db | tee /dev/shm/wp-logins.$db | less -S
