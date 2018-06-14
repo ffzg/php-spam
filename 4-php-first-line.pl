@@ -4,14 +4,19 @@ use strict;
 use autodie;
 use Data::Dumper;
 
+# sudo find /srv/www/ -size +7k -name '*.php' | ./this-script
+
 my $stat;
+my $count = 0;
 
 while(<>) {
 	chomp;
 	my $file = $_;
 
+	print STDERR "." if $count++ % 1000 == 0;
+
 	if ( -s $file == 0 ) {
-		print "EMPTY $file\n";
+		print STDERR "\nEMPTY $file\n";
 		next;
 	}
 
